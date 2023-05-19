@@ -8,25 +8,25 @@
  */
 int main(int argc, char **argv)
 {
-	char *prompt = "QueenShell$ ";
 	char *readline;
 	ssize_t read_cmd;
 	size_t i = 0;
 
 	(void)argc;
-	(void)argv;
 
 	while (1)
 	{
-		write(STDOUT_FILENO, prompt, 13);
+		prompt();
 		read_cmd = getline(&readline, &i, stdin);
 		if (read_cmd == -1)
 		{
-			write(STDOUT_FILENO, "\nQuitting Shell...\n", 17);
+			write(STDOUT_FILENO, "\nQuiting Shell...\n", 17);
 			return (-1);
 		}
-		write(STDOUT_FILENO, readline, i);
+		parse(readline, &argv);
+		exec(argv);
 	}
+	free(argv);
 	free(readline);
 	return (0);
 }
