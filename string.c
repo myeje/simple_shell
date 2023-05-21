@@ -18,33 +18,23 @@ int len(const char *str)
 }
 
 /**
- ** copy - function that copies content from one location to another
- ** @original: copy from
- ** Return: pointer to location of copy
+ ** copy - function copies chars from one pointer to another
+ ** @destination: pointer to where the new copy should be stroed
+ ** @original: pointer to string to copy
+ ** Return: copied chars
  **/
-char *copy(const char *original)
+char *copy(char *destination, const char *original)
 {
-	size_t length = len(original);
-	char *destination;
-	char *ptr;
-
-	destination = malloc((length + 1) * sizeof(char));
-	if (destination == NULL)
-	{
-		perror("Error: Memory allocation failed.\n");
-		return (NULL);
-	}
-
-	ptr = destination;
+	char *ptr = destination;
 
 	while (*original != '\0')
 	{
-		*ptr = *original;
-		ptr++;
+		*destination = *original;
+		destination++;
 		original++;
 	}
-	*ptr = '\0';
-	return (destination);
+	*destination = '\0';
+	return (ptr);
 }
 
 /**
@@ -66,4 +56,26 @@ int _compare(char *s1, char *s2)
 		return (0);
 	else
 		return ((*s1 < *s2) ? -1 : 1);
+}
+
+/**
+ ** concate - function that conctenates
+ ** @dest: destination file to concate to
+ ** @src: character to be added
+ ** Return: pointer to destination file
+ **/
+char *concate(char *dest, char *src)
+{
+	char *ret = dest;
+
+	while (*dest)
+		dest++;
+	while (*src)
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
+	*dest = '\0';
+	return (ret);
 }

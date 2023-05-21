@@ -7,15 +7,36 @@
  **/
 void exec(char **argv)
 {
-	char *cmd = NULL;
+	int status;
+	pid_t pid;
+	char *path;
 
-	if (argv)
+	if (argv && argv[0])
 	{
-		cmd = argv[0];
-
-		if (execve(cmd, argv, NULL) == -1)
+		pid = fork();
+		if (pid < 0)
 		{
-			perror("Error:");
+			perror("Error: Fork failed");
+			return;
+		}
+		else if (pid == 0)
+		{
+			path = path_finder(av[0]);
+			if (path == NULL)
+			{
+				perror("Error: Command not found\n");
+				exit(EXIT_FAILURE);
+			}
+			execve(path, argv, NULL);
+			perror("Error: Execution failed");
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			if (waitpid(pid, &status, 0) == -1)
+				perror("Error: Wait failed");
+			else if (!WIFEXITED(status))
+			perror("Error: Child process did not exit properly\n");
 		}
 	}
 }

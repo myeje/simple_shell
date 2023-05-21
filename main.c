@@ -21,12 +21,31 @@ int main(int argc, char **argv)
 		if (read_cmd == -1)
 		{
 			write(STDOUT_FILENO, "\nQuiting Shell...\n", 17);
+			free(readline);
 			return (-1);
 		}
 		parse(readline, &argv);
+		if (_compare(argv[0], "exit") == 0)
+		{
+			for (i = 0; argv[i] != NULL; i++)
+				free(argv[i]);
+			free(argv);
+			free(readline);
+			exit(EXIT_SUCCESS);
+		}
+		if (_compare(argv[0], "env") == 0)
+		{
+			shell_env();
+			for (i = 0; argv[i] != NULL; i++)
+				free(argv[i]);
+			free(argv);
+			continue;
+		}
 		exec(argv);
+		for (i = 0; argv[i] != NULL; i++)
+			free(argv[i]);
+		free(argv);
 	}
-	free(argv);
 	free(readline);
 	return (0);
 }
