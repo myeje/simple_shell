@@ -21,7 +21,7 @@ void exec(char **argv)
 		}
 		else if (pid == 0)
 		{
-			path = path_finder(av[0]);
+			path = path_finder(argv[0]);
 			if (path == NULL)
 			{
 				perror("Error: Command not found\n");
