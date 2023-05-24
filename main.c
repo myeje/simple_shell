@@ -53,6 +53,5 @@ void array_free(char **argv)
  **/
 void prompt(void)
 {
- 	write(STDOUT_FILENO, "QueenShell$ ", 13);
+	write(STDOUT_FILENO, "QueenShell$ ", 13);
 }
- 

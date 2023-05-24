@@ -13,7 +13,7 @@ void exec(char **av)
 		user_command = av[0];
 		if (execve(user_command, av, NULL) == -1)
 		{
-			perror("./task1");
+			perror("./test1");
 		}
 	}
 }
