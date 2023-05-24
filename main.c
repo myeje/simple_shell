@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 		if (read_cmd == -1)
 		{
 			free(readline);
-			return (-1);
+			exit(EXIT_SUCCESS);
 		}
 		parse(readline, &argv);
 		exec(argv);
