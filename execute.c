@@ -19,11 +19,6 @@ void exec(char **av)
 		}
 		else if (pid == 0)
 		{
-			if (av[1] != NULL)
-			{
-				perror("./test1: No such file or directory");
-				exit(0);
-			}
 			if (execve(av[0], av, NULL) == -1)
 			{
 				perror("./task1");
