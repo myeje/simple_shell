@@ -6,14 +6,31 @@
  **/
 void exec(char **av)
 {
-	char *user_command = NULL;
+	pid_t pid;
+	int status;
 
 	if (av)
 	{
-		user_command = av[0];
-		if (execve(user_command, av, NULL) == -1)
+		pid = fork();
+		if (pid == -1)
 		{
-			perror("Error: ");
+			perror("Error: Forked failed");
+			return;
 		}
+		else if (pid == 0)
+		{
+			if (av[1] != NULL)
+			{
+				perror("./test1: No such file or directory");
+				exit(0);
+			}
+			if (execve(av[0], av, NULL) == -1)
+			{
+				perror("./test1");
+				exit(0);
+			}
+		}
+		else
+			waitpid(pid, &status, 0);
 	}
 }
