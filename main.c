@@ -16,11 +16,11 @@ int main(int argc, char **argv)
 
 	while (1)
 	{
-		prompt();
+		if (isatty(STDIN_FILENO))
+			prompt();
 		read_cmd = getline(&readline, &i, stdin);
 		if (read_cmd == -1)
 		{
-			write(STDOUT_FILENO, "\nQuiting Shell...\n", 17);
 			free(readline);
 			return (-1);
 		}
