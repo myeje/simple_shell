@@ -25,6 +25,12 @@ int main(int argc, char **argv)
 			exit(EXIT_SUCCESS);
 		}
 		parse(readline, &argv);
+		if (_compare(argv[0], "exit") == 0)
+		{
+			free(readline);
+			array_free(argv);
+			exit(EXIT_SUCCESS);
+		}
 		exec(argv);
 		array_free(argv);
 	}
