@@ -6,14 +6,26 @@
  **/
 void exec(char **av)
 {
-	char *user_command = NULL;
+	pid_t pid;
+	int status;
 
 	if (av)
 	{
-		user_command = av[0];
-		if (execve(user_command, av, NULL) == -1)
+		pid = fork();
+		if (pid == -1)
 		{
-			perror("Error: ");
+			perror("Error: Forked failed");
+			return;
 		}
+		else if (pid == 0)
+		{
+			if (execve(av[0], av, NULL) == -1)
+			{
+				perror("./task1");
+				exit(1);
+			}
+		}
+		else
+			waitpid(pid, &status, 0);
 	}
 }
