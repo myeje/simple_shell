@@ -1,42 +1,19 @@
 #include "main.h"
-
 /**
- ** exec - function that executes user command
- ** @argv: array of commands to execute
+ ** exec - function to execute commands in an array
+ ** @av: array of strings to execute from
  ** Return: Nothing
  **/
-void exec(char **argv)
+void exec(char **av)
 {
-	int status;
-	pid_t pid;
-	char *path;
+	char *user_command = NULL;
 
-	if (argv && argv[0])
+	if (av)
 	{
-		pid = fork();
-		if (pid < 0)
+		user_command = av[0];
+		if (execve(user_command, av, NULL) == -1)
 		{
-			perror("Error: Fork failed");
-			return;
-		}
-		else if (pid == 0)
-		{
-			path = path_finder(argv[0]);
-			if (path == NULL)
-			{
-				perror("Error: Command not found\n");
-				exit(EXIT_FAILURE);
-			}
-			execve(path, argv, NULL);
-			perror("Error: Execution failed");
-			exit(EXIT_FAILURE);
-		}
-		else
-		{
-			if (waitpid(pid, &status, 0) == -1)
-				perror("Error: Wait failed");
-			else if (!WIFEXITED(status))
-			perror("Error: Child process did not exit properly\n");
+			perror("Error: ");
 		}
 	}
 }
