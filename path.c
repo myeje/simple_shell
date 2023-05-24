@@ -21,13 +21,8 @@ char *path_finder(char *command)
 	{
 		finish_line = malloc(len(dir) + len(command) + 2);
 		if (finish_line == NULL)
-		{
-			perror("Error: failed to allocate memory.\n");
 			exit(-1);
-		}
-		copy(finish_line, dir);
-		concate(finish_line, "/");
-		concate(finish_line, command);
+		full_path(finish_line, dir, command);
 		if (access(finish_line, X_OK) == 0)
 			cmd_path = strdup(finish_line);
 		free(finish_line);
@@ -49,4 +44,18 @@ char *path_finder(char *command)
 	}
 	free(path_copy);
 	return (cmd_path);
+}
+
+/**
+ ** full_path - function that gets the full path
+ ** @fp: file to copy to
+ ** @d: first file to copy to fp
+ ** @cmd: second filr to copy to fp
+ ** Return: Nothing
+ **/
+void full_path(char *fp, char *d, char *cmd)
+{
+	copy(fp, d);
+	concate(fp, "/");
+	concate(fp, cmd);
 }
