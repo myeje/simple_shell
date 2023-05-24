@@ -1,1 +1,3 @@
-git log --format='%aN <%aE>' | sort -u
+# List of Collaborators
+Joshua Emore <ehimareemore@gmail.com>
+queenoko <quimaudongwo@gmail.com>
