@@ -5,23 +5,16 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
-char prompt(void);
+void prompt(void);
 int len(const char *str);
 char *copy(char *destination, const char *original);
 int _compare(char *s1, char *s2);
 char *concate(char *dest, char *src);
-char **parse(char *input);
-int exec(char **argv);
+void parse(char *input, char ***argv);
+void exec(char **argv);
 char *path_finder(char *command);
+void shell_env(void);
 extern char **environ;
 void array_free(char **argv);
 void change_directory(char **argv);
-int builtin_struct(void);
-int shell_env(char **argv);
-int shell_exit(char **argv);
-int shell_cd(char **argv);
-void full_path(char *fp, char *d, char *cmd);
-int exec_external(char **argv);
-
-
 #endif

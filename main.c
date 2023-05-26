@@ -8,36 +8,44 @@
  **/
 int main(int argc, char **argv)
 {
-	char *readline;
 	ssize_t read_cmd;
+	char *readline = NULL;
 	size_t i = 0;
+	int execute_stat = -1;
 
 	(void)argc;
 
-	while (1)
+	if (isatty(STDIN_FILENO) == 1)
 	{
-		if (isatty(STDIN_FILENO))
+		while (execute_stat == -1)
+		{
 			prompt();
-		read_cmd = getline(&readline, &i, stdin);
-		if (read_cmd == -1)
-		{
+			read_cmd = getline(&readline, &i, stdin);
+	
+			if (read_cmd == -1)
+
+			{
+				if (feof(stdin))
+				{
+					free(readline);
+					exit(EXIT_SUCCESS);
+				}
+				else{
+					free(readline);
+					perror("Error");
+					exit(EXIT_FAILURE);
+				}
+			}
+			argv = parse(readline);
+			execute_stat = exec(argv);
+			if (execute_stat >= 0)
+				exit(execute_stat);
 			free(readline);
-			exit(EXIT_SUCCESS);
+			free(argv);
 		}
-		parse(readline, &argv);
-		if (_compare(argv[0], "exit") == 0)
-		{
-			free(readline);
-			array_free(argv);
-			exit(EXIT_SUCCESS);
-		}
-		exec(argv);
-		array_free(argv);
 	}
-	free(readline);
 	return (0);
 }
-
 
 /**
  ** array_free - function that frees an array
@@ -49,15 +57,17 @@ void array_free(char **argv)
 
 	for (i = 0; argv[i] != NULL; i++)
 		free(argv[i]);
-	free(argv);
 }
 
 
 /**
  ** prompt - function that prompt the simple shell
- ** Return: Nothing
+ ** Return: prompt
  **/
-void prompt(void)
+char prompt(void)
 {
-	write(STDOUT_FILENO, "QueenShell$ ", 13);
+	char ret;
+	  
+	ret = write(STDOUT_FILENO, "QueenShell$ ", 13);
+	return (ret);
 }
