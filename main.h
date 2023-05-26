@@ -22,6 +22,6 @@ int shell_exit(char **argv);
 int shell_cd(char **argv);
 void full_path(char *fp, char *d, char *cmd);
 int exec_external(char **argv);
-
+char *read_cmd(void);
 
 #endif

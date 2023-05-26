@@ -8,9 +8,7 @@
  **/
 int main(int argc, char **argv)
 {
-	ssize_t read_cmd;
-	char *readline = NULL;
-	size_t i = 0;
+	char *input;
 	int execute_stat = -1;
 
 	(void)argc;
@@ -20,27 +18,12 @@ int main(int argc, char **argv)
 		while (execute_stat == -1)
 		{
 			prompt();
-			read_cmd = getline(&readline, &i, stdin);
-	
-			if (read_cmd == -1)
-
-			{
-				if (feof(stdin))
-				{
-					free(readline);
-					exit(EXIT_SUCCESS);
-				}
-				else{
-					free(readline);
-					perror("Error");
-					exit(EXIT_FAILURE);
-				}
-			}
-			argv = parse(readline);
+			input = read_cmd();
+			argv = parse(input);
 			execute_stat = exec(argv);
 			if (execute_stat >= 0)
 				exit(execute_stat);
-			free(readline);
+			free(input);
 			free(argv);
 		}
 	}
