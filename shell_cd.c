@@ -9,9 +9,16 @@ int shell_cd(char **argv)
 {
 	int ret = chdir(argv[1]);
 
-	if (ret != 0)
-		perror("Error: Cannot change directory");
-	if (argv[1] == NULL)
-		perror("Error: Specify directory");
+	if (args[1] == NULL)
+	{
+		perror("Error: Expected argument to \"cd\"\n");
+	}
+	else
+	{
+		if (ret != 0)
+		{
+			perror("Error: changing dir\n");
+		}
+	}
 	return (-1);
 }
