@@ -3,7 +3,6 @@
 /**
  ** parse - fuction that parses user commands
  ** @input: commands from user
- ** @av: array to hold parsed commands
  ** Return: Nothing
  **/
 
@@ -14,7 +13,7 @@ char **parse(char *input)
 	char *tk;
 	int i = 0;
 	int buffer = 64;
-	
+
 	token = malloc(buffer * sizeof(char));
 	if (token == NULL)
 	{
@@ -22,7 +21,7 @@ char **parse(char *input)
 		exit(EXIT_FAILURE);
 	}
 	tk = strtok(input, delim);
-						    
+
 	for (; tk != NULL; i++)
 	{
 		if (tk[0] == '#')
