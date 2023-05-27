@@ -12,7 +12,6 @@ void non_interactive_mode(void)
 
 	while (execute_stat == -1)
 	{
-		prompt();
 		input = non_int_read();
 		parse(input, &argv);
 		execute_stat = exec(argv);
