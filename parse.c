@@ -40,7 +40,7 @@ void parse(char *input, char ***av)
 		{
 			break;
 		}
-	
+
 		(*av)[i] = malloc(sizeof(char) * (len(tk) + 1));
 
 		copy((*av)[i], tk);
