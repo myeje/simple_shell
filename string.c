@@ -17,6 +17,7 @@ int len(const char *str)
 	return (i);
 }
 
+
 /**
  ** copy - function copies chars from one pointer to another
  ** @destination: pointer to where the new copy should be stroed
@@ -45,6 +46,12 @@ char *copy(char *destination, const char *original)
  **/
 int _compare(char *s1, char *s2)
 {
+	if (s1 == NULL || s2 == NULL)
+	{
+		if (s1 == s2)
+			return (0);
+		return ((s1 == NULL) ? -1 : 1);
+	}
 	while (*s1 && *s2)
 	{
 		if (*s1 != *s2)
