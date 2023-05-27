@@ -27,6 +27,8 @@ int main(int argc, char **argv)
 				exit(execute_stat);
 		}
 	}
+	else
+		non_interactive_mode();
 	return (0);
 }
 

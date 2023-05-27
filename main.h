@@ -23,5 +23,6 @@ int shell_cd(char **argv);
 void full_path(char *fp, char *d, char *cmd);
 int exec_external(char **argv);
 char *read_cmd(void);
-
+void non_interactive_mode(void);
+char *non_int_read(void);
 #endif
