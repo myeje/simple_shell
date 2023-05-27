@@ -10,7 +10,7 @@ int len(const char *str);
 char *copy(char *destination, const char *original);
 int _compare(char *s1, char *s2);
 char *concate(char *dest, char *src);
-void parse(char *input, char ***av);
+char **parse(char *input);
 int exec(char **argv);
 char *path_finder(char *command);
 extern char **environ;

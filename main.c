@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 		{
 			prompt();
 			input = read_cmd();
-			parse(input, &argv);
+			argv = parse(input);
 			execute_stat = exec(argv);
 			free(input);
 			free(argv);

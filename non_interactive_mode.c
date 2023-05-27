@@ -13,7 +13,7 @@ void non_interactive_mode(void)
 	while (execute_stat == -1)
 	{
 		input = non_int_read();
-		parse(input, &argv);
+		argv = parse(input);
 		execute_stat = exec(argv);
 		free(input);
 		free(argv);
