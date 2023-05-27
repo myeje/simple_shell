@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
-void prompt(void);
+char prompt(void);
 int len(const char *str);
 char *copy(char *destination, const char *original);
 int _compare(char *s1, char *s2);

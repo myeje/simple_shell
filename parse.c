@@ -34,14 +34,11 @@ void parse(char *input, char ***av)
 	tk = strtok(input, delim);
 	for (i = 0; tk != NULL; i++)
 	{
-<<<<<<< HEAD
-=======
 		if (tk[0] == '#')
 		{
 			break;
 		}
 
->>>>>>> 308fe72b32da175bea21729a3541cac91472ea4a
 		(*av)[i] = malloc(sizeof(char) * (len(tk) + 1));
 		copy((*av)[i], tk);
 		tk = strtok(NULL, delim);

@@ -49,8 +49,6 @@ int main(int argc, char **argv)
 	free(readline);
 	return (0);
 }
-<<<<<<< HEAD
-=======
 
 /**
  ** array_free - function that frees an array
@@ -76,4 +74,3 @@ char prompt(void)
 	ret = write(STDOUT_FILENO, "QueenShell$ ", 13);
 	return (ret);
 }
->>>>>>> 308fe72b32da175bea21729a3541cac91472ea4a
