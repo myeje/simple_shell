@@ -25,4 +25,7 @@ int exec_external(char **argv);
 char *read_cmd(void);
 void non_interactive_mode(void);
 char *non_int_read(void);
+ssize_t _getline(char **ptr, size_t *n, FILE *stream);
+void *_allocate(void *buffer, unsigned int size_prev, unsigned int size_new);
+void buffer_assign(char **ptr, char *str, size_t *a, size_t b);
 #endif
