@@ -11,7 +11,11 @@ int main(int argc, char **argv)
 	char *input;
 	int execute_stat = -1;
 
-	(void)argc;
+	if (argc > 1)
+	{
+		execute_from_file(argv[1]);
+		return (0);
+	}
 
 	if (isatty(STDIN_FILENO) == 1)
 	{
