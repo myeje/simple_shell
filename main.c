@@ -19,12 +19,12 @@ int main(int argc, char **argv)
 		{
 			prompt();
 			input = read_cmd();
-			argv = parse(input);
+			parse(input, &argv);
 			execute_stat = exec(argv);
-			if (execute_stat >= 0)
-				exit(execute_stat);
 			free(input);
 			free(argv);
+			if (execute_stat >= 0)
+				exit(execute_stat);
 		}
 	}
 	return (0);

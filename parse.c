@@ -7,31 +7,45 @@
  ** Return: Nothing
  **/
 
-char **parse(char *input)
+void parse(char *input, char ***av)
 {
 	const char *delim = " \t\r\n\a\"";
-	char **token;
 	char *tk;
-	int i = 0;
-				
-	token = malloc((len(input) + 1) * sizeof(char));
-	if (token == NULL)
+	int i;
+	int tk_num = 0;
+	char *input_copy = NULL;
+
+
+	input_copy = malloc((len(input) + 1) * sizeof(char));
+	if (input_copy == NULL)
 	{
 		perror("Error: Memory allocation failed\n");
-		return (0);
+		return;
+	}
+	copy(input_copy, input);
+	tk = strtok(input_copy, delim);
+	for (; tk != NULL; tk_num++)
+		tk = strtok(NULL, delim);
+	tk_num++;
+	*av = malloc(sizeof(char *) * tk_num);
+	if (*av == NULL)
+	{
+		perror("Error: Memory allocation failed");
+		return;
 	}
 	tk = strtok(input, delim);
-	
-	for (; tk != NULL; i++)
+	for (i = 0; tk != NULL; i++)
 	{
 		if (tk[0] == '#')
 		{
 			break;
 		}
-		token[i] = tk;
+	
+		(*av)[i] = malloc(sizeof(char) * (len(tk) + 1));
+
+		copy((*av)[i], tk);
 		tk = strtok(NULL, delim);
 	}
-	i++;
-	token[i] = NULL;
-	return (token);
+	(*av)[i] = NULL;
+	free(input_copy);
 }

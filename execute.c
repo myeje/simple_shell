@@ -43,7 +43,7 @@ int exec(char **argv)
 int exec_external(char **argv)
 {
 	pid_t pid;
-	int status;
+	int stat;
 	
 	pid = fork();
 	if (pid < 0)
@@ -53,14 +53,18 @@ int exec_external(char **argv)
 		char *path = path_finder(argv[0]);
 		if (execve(path, argv, NULL) == -1)
 		{
-			perror("error in new_process: child process");
+			perror("Error:");
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			waitpid(pid, &status, WUNTRACED);
+		while (1) 
+		{
+			waitpid(pid, &stat, WUNTRACED);
+			if (WIFEXITED(stat) || WIFSIGNALED(stat))
+				break;
+		}
 	}
 	return (-1);
 }
