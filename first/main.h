@@ -10,18 +10,14 @@ int len(const char *str);
 char *copy(char *destination, const char *original);
 int _compare(char *s1, char *s2);
 char *concate(char *dest, char *src);
-void parse(char *input, char ***av);
-int exec(char **argv);
+void parse(char *input, char ***argv);
+void exec(char **argv);
 char *path_finder(char *command);
+void shell_env(void);
 extern char **environ;
-void array_free(char **argv);
-void change_directory(char **argv);
-int builtin_struct(void);
-int shell_env(char **argv);
-int shell_exit(char **argv);
-int shell_cd(char **argv);
+void *_expan_mem(void *ptr, unsigned int prev_size, unsigned int add_size);
+void give_linptr(char **lineptr, size_t *n, char *buff, size_t q);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void full_path(char *fp, char *d, char *cmd);
-int exec_external(char **argv);
-char *read_cmd(void);
-
+void array_free(char **argv);
 #endif

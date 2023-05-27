@@ -6,13 +6,15 @@
  ** @av: array to hold parsed commands
  ** Return: Nothing
  **/
+
 void parse(char *input, char ***av)
 {
-	const char *delim = " \n";
+	const char *delim = " \t\r\n\a\"";
 	char *tk;
 	int i;
 	int tk_num = 0;
 	char *input_copy = NULL;
+
 
 	input_copy = malloc((len(input) + 1) * sizeof(char));
 	if (input_copy == NULL)
@@ -38,8 +40,9 @@ void parse(char *input, char ***av)
 		{
 			break;
 		}
-
+	
 		(*av)[i] = malloc(sizeof(char) * (len(tk) + 1));
+
 		copy((*av)[i], tk);
 		tk = strtok(NULL, delim);
 	}
