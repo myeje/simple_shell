@@ -11,7 +11,7 @@
 ssize_t _getline(char **ptr, size_t *n, FILE *stream)
 {
 	ssize_t ret;
-	char ch = 'x'; 
+	char ch = 'x';
 	char *buffer;
 	static ssize_t count;
 	int read_status = 1;

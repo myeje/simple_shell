@@ -28,7 +28,7 @@ char *non_int_read(void)
 		{
 			read_line[i] = '\0';
 			return (read_line);
-	
+
 		}
 		else
 			read_line[i] = charData;

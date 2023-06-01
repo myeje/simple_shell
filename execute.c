@@ -15,7 +15,7 @@ int exec(char **argv)
 		"cd"
 	};
 	int (*builtin_functions[])(char **) = {
- 		&shell_exit,
+		&shell_exit,
 		&shell_env,
 		&shell_cd
 	};
@@ -44,13 +44,14 @@ int exec_external(char **argv)
 {
 	pid_t pid;
 	int stat;
-	
+
 	pid = fork();
 	if (pid < 0)
 		perror("Error: Fork failed");
 	else if (pid ==  0)
 	{
 		char *path = path_finder(argv[0]);
+
 		if (execve(path, argv, NULL) == -1)
 		{
 			perror("Error:");
@@ -59,7 +60,7 @@ int exec_external(char **argv)
 	}
 	else
 	{
-		while (1) 
+		while (1)
 		{
 			waitpid(pid, &stat, WUNTRACED);
 			if (WIFEXITED(stat) || WIFSIGNALED(stat))
