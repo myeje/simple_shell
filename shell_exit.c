@@ -8,6 +8,7 @@
 int shell_exit(char **argv)
 {
 	int exit_status = 0;
+	int i = 0;
 
 	if (argv[1] != NULL)
 	{
@@ -18,6 +19,10 @@ int shell_exit(char **argv)
 			return (-1);
 		}
 	}
-
+	for (; argv[i] != NULL; i++)
+	{
+		free(argv[i]);
+	}
+	free(argv);
 	exit(exit_status);
 }
