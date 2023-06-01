@@ -12,7 +12,7 @@ int shell_exit(char **argv)
 	if (argv[1] != NULL)
 	{
 		exit_status = _atoi(argv[1]);
-		if (status == -1)
+		if (exit_status == -1)
 		{
 			perror("Error: Incorrect exit status\n");
 			return (-1);
