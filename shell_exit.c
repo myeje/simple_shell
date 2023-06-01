@@ -7,11 +7,17 @@
  **/
 int shell_exit(char **argv)
 {
-	if (argv[1])
+	int exit_status = 0;
+
+	if (argv[1] != NULL)
 	{
-		return (_atoi(argv[1]));
+		exit_status = _atoi(argv[1]);
+		if (status == -1)
+		{
+			perror("Error: Incorrect exit status\n");
+			return (-1);
+		}
 	}
 
-	exit(EXIT_SUCCESS);
-	return (0);
+	exit(exit_status);
 }
